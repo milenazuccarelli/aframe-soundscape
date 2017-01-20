@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="WebVR">
+    <meta name="twitter:description" content="visual soundscape orchestration">
+
+    <!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Visual Soundscape orchestration</title>
+    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+
+    <script>
+        AFRAME.registerComponent('scale-on-mouseenter', {
+          schema: {
+            to: {default: '2.5 2.5 2.5'}
+          },
+          init: function () {
+            var data = this.data;
+            this.el.addEventListener('click', function () {
+              this.setAttribute('scale', data.to);
+            });
+          }
+        });
+    </script>
+  </head>
+  <body>
+
+<a-scene>
+  <a-assets>
+        <!-- AUDIO FILES -->
+        <!-- Kiki -->
+        <audio id="k1" src="media/sound/cube_sound.wav" preload="auto">
+        <audio id="k2" src="media/sound/k1.wav" preload="auto">
+        <audio id="k3" src="media/sound/k2.wav" preload="auto">
+        <audio id="k4" src="media/sound/k3.wav" preload="auto">
+        <audio id="k5" src="media/sound/k4.wav" preload="auto">
+        <audio id="k6" src="media/sound/k5.wav" preload="auto">
+        <audio id="k7" src="media/sound/k6.wav" preload="auto">
+        <audio id="k8" src="media/sound/k7.mp3" preload="auto">
+        <audio id="k9" src="media/sound/k8.aiff" preload="auto">
+        <!-- Bouba -->
+        <audio id="b1" src="media/sound/s1.wav" preload="auto">
+        <audio id="b2" src="media/sound/s2.wav" preload="auto">
+        <audio id="b3" src="media/sound/s3.wav" preload="auto">
+        <audio id="b4" src="media/sound/s4.wav" preload="auto">
+
+        <!-- IMAGE FILES -->
+        <img id="box" src="media/images/cube-sea.jpg">
+        <img id="box1" src="media/images/square1.png">
+        <img id="box2" src="media/images/square2.png">
+        <img id="box3" src="media/images/square3.png">
+        <img id="silky" src="media/images/SILKY.png">
+        <img id="torusTexture" src="media/images/torus.png">
+        <img id="plane1" src="media/images/1.png">
+        <img src="media/images/grid.png" id="grid" crossorigin="anonymous">
+
+        <!-- GEOMETRY MIXINS -->
+        <a-mixin id="box"
+                 geometry="primitive: box; depth: .125; height: .125;
+                           width: .125;"></a-mixin>
+        <a-mixin id="circle"
+                 geometry="primitive: circle; radius: .2;
+                           segments: 100; thetaStart: 0; thetaLength: 360">
+        </a-mixin>
+        <a-mixin id="cylinder"
+                 geometry="primitive: cylinder; radius: 0.2; height: .5;
+                           segmentsRadial: 50; segmentsHeight: 50:
+                           openEnded: true; thetaStart: 0; thetaLength: 360">
+        </a-mixin>
+        <a-mixin id="ring"
+                  geometry="primitive: ring; radiusInner: .3; radiusOuter: .5;
+                            segmentsTheta: 50"></a-mixin>
+        <a-mixin id="sphere"
+                  geometry="primitive: sphere; radius: .1"></a-mixin>
+        <a-mixin id="torus"
+                  geometry="primitive: torus; arc: 720; radius: .3; radiusTubular: .05;
+                            segmentsTubular: 10;"></a-mixin>
+        <a-mixin id="torus-knot"
+                  geometry="primitive: torusKnot; p: 3; q: 7; radius: .8;
+                            segmentsRadial: 50; radiusTubular: .9; segmentsTubular: 5">
+        </a-mixin>
+
+        <!-- ANIMATION MIXINS -->
+        <a-mixin id="yoyo" direction="alternate" fill="forwards"
+                           repeat="indefinite"></a-mixin>
+        <a-mixin id="spin" attribute="rotation" to="0 360 0"
+                 repeat="indefinite" easing="linear" dur="10000"></a-mixin>
+        <a-mixin id="spin-x" mixin="spin" attribute="rotation" to="360 0 0"
+                 repeat="indefinite" easing="linear" dur="10000"></a-mixin>
+
+        <a-mixin id="color" material="color: #FFFFC3"></a-mixin>
+        <a-mixin id="doubleside" material="side: double"></a-mixin>
+
+        <a-asset-item id="sculpture" src="sculpture.dae"></a-asset-item>
+  </a-assets>
+  
+ 
+        <!--  BOXES -->
+
+        <!-- first -->
+        <a-box src="#box1" position="0 2 -5" rotation="0 45 45" scale="2 2 2"
+         scale-on-mouseenter="to: 2.2 2.2 2.2" sound="src: #k1; on: mouseenter">
+        <a-animation attribute="position" to="0 2.2 -5" direction="alternate" dur="2000"
+        repeat="indefinite"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="300" to="2.3 2.3 2.3"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
+        <a-animation attribute="rotation" begin="mouseenter" dur="2000" to="360 405 45"></a-animation>
+        </a-box>
+ 
+        <!-- second -->
+        <a-box src="#box2"position="9 4 -8" rotation="0 45 45" scale="4 4 4"
+         scale-on-mouseenter="to: 4.5 4.5 4.5"  sound="src: #k2; on: mouseenter" >
+        <a-animation attribute="position" to="8.1 4 -8.2" direction="alternate" dur="2000"
+        repeat="indefinite"></a-animation>
+        <a-animation attribute="scale" begin="mouseenter" dur="300" to="2.3 2.3 2.3"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="300" to="2 2 2"></a-animation>
+        <a-animation attribute="rotation" begin="mouseenter" dur="2000" to="360 405 45"></a-animation>
+        </a-box>
+
+        <!-- third -->
+        <a-box position="-30 25 25" material="src: #box" rotation="0 45 45" scale="11 11 11"
+        scale-on-mouseenter="to: 2.2 2.2 2.2" sound="src: #k3; on: mouseenter">
+        </a-box>
+
+        <!-- fourth -->
+        <a-box position="15 8 -6" rotation="0 12 12" scale="10 10 10" material="src: #box1" sound="src: #k4; on: mouseenter" 
+        scale-on-mouseenter="to: 4.5 4.5 4.5"></a-box>
+
+        <!-- fifth -->
+        <a-box material="src: #box1" sound="src: #k5; on: mouseenter" position="14 12 -6" rotation="0 45 45" scale="7 7 7"
+        scale-on-mouseenter="to: 4.5 4.5 4.5"></a-box>
+
+        <!-- sixth -->
+        <a-box material="src: #box1" sound="src: #k6; on: mouseenter" position="-55 8 0" rotation="0 45 45" scale="20 20 20"
+        scale-on-mouseenter="to: 10.5 10.5 10.5"></a-box>
+        
+        <!-- seventh -->
+        <a-box material="src: #box1" sound="src: #k7; on: mouseenter" position="-45 12 0" rotation="0 45 45" scale="12 12 12"
+        scale-on-mouseenter="to: 10.5 10.5 10.5"></a-box>
+
+        <!-- eighth -->
+        <a-box material="src: #box1" sound="src: #k8; on: mouseenter" position="-45 15 3" rotation="0 45 45" scale="12 12 12"
+        scale-on-mouseenter="to: 10.5 10.5 10.5"></a-box>
+
+        <!-- ninth -->
+        <a-entity position="-3.5 1 0" rotation="0 45 0" geometry="primitive: box"
+        material="color: red; opacity: 0.25" wireframe="true" sound="src: #k9; on: mouseenter">
+        <a-entity rotation="0 45 0" scale="0.5 0.5 0.5" material="src: #box1" geometry="primitive: box"></a-entity>
+        </a-entity>
+
+        <!-- tenth -->
+        <a-entity position="0 10 10" rotation="0 45 0" geometry="primitive: box" material="src: #box3" sound="src: #k1; on: mouseenter"></a-entity>
+        
+        <!-- eleventh -->
+        <a-entity position="0 30 10" rotation="0 45 0" scale="9 9 9" geometry="primitive: box" material="src: #box" sound="src: #k2; on: mouseenter"></a-entity>
+
+        <!-- twelve -->
+        <a-entity position="0 6 40" rotation="0 45 10" scale="4 4 4" geometry="primitive: box" material="src: #box2" sound="src: #k3; on: mouseenter"></a-entity>
+
+        <!-- thirteen -->
+        <a-entity position="20 3 30" rotation="0 45 10" scale="9 9 9" geometry="primitive: box" material="src: #box3" sound="src: #k4; on: mouseenter"></a-entity>
+
+        <!-- fourteen -->
+        <a-entity position="3.5 1 0" rotation="0 45 0" geometry="primitive: box"
+        wireframe="true" sound="src: #k5; on: mouseenter">
+        <a-entity rotation="0 45 0" scale="0.5 0.5 0.5"
+        geometry="primitive: box" material="src: #box2"></a-entity>
+        </a-entity>
+
+        <!-- OTHER SHAPES -->
+
+        <!-- Planes -->
+        <a-entity sound="src: #k6; on: mouseenter" geometry="primitive:plane" material="src: #plane1" position="3 8 -6" scale="4 4 4"></a-entity>
+        <a-entity sound="src: #k7; on: mouseenter" geometry="primitive:plane" material="src: #plane1" position="-20 8 -15" scale="10 10 10"></a-entity>
+
+        <a-entity position="0 0 0"
+        geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
+        material="src: #grid; repeat: 10000 10000; transparent: true;sphericalEnvMap: #sky;"></a-entity>
+  
+        <!-- Pacman -->
+        <a-cylinder position="-4 3 -5" rotation="65 45 0"  wireframe="true" radius="1" height="1" theta-start="57"
+        theta-length="286" side="double" color="#FFC65D" sound="src: #K8; on: mouseenter"></a-cylinder>
+
+        <!-- Hexagon -->
+        <a-cylinder position="-4 20 -5" rotation="90 -90 20" radius="5" segments-radial="6"
+        color="#222" wireframe="true" sound="src: #K9; on: mouseenter"></a-cylinder>
+        <a-cylinder position="-4 20 -5" rotation="90 -90 20" radius="5" segments-radial="6"
+        color="#F16745"></a-cylinder>
+
+        <!-- Curved cylinder -->
+        <a-cylinder position="0 15 -5" rotation="45 60 0" radius="1.5" scale="5 5 5" height="1" theta-start="0"
+                  theta-length="172" side="double" open-ended="true"
+                  color="#222" wireframe="true" sound="src: #K1; on: mouseenter"></a-cylinder>
+        <a-cylinder position="0 15 -5" rotation="45 60 0" radius="1.5" scale="5 5 5" height="1" theta-start="0"
+                  theta-length="172" side="double" open-ended="true"
+                  color="#93648D"></a-cylinder>
+
+        <!-- Curved cylinder 2 -->
+        <a-cylinder position="-35 15 -5" rotation="45 60 0" radius="1.5" scale="7 7 7" height="1" theta-start="0"
+                  theta-length="172" side="double" open-ended="true"
+                  color="#222" wireframe="true" sound="src: #K2; on: mouseenter"></a-cylinder>
+                        <a-cylinder position="-35 15 -5" rotation="45 60 0" radius="1.5" scale="7 7 7" height="1" theta-start="0"
+                  theta-length="172" side="double" open-ended="true"
+                  color="#93648D"></a-cylinder>
+
+
+        <!-- BOUBA -->
+
+        <!-- Torus Knot -->
+        <a-entity sound="src: #b1; on: mouseenter" scale="2 2 2" geometry="primitive: torusKnot;" position="0 6 -10" wireframe="true" material="src: #torusTexture">
+          <a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite" ></a-animation>
+        </a-entity>
+
+        <!-- Torus Knot 2 -->
+        <a-entity sound="src: #b2; on: mouseenter" scale="4 4 4" geometry="primitive: torusKnot;" position="0 6 20" material="src: #torusTexture">
+          <a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite" ></a-animation>
+        </a-entity>
+
+        <!-- Torus Knot 3 -->
+        <a-entity sound="src: #b3; on: mouseenter" scale="7 6 4" geometry="primitive: torusKnot;" position="-30 6 20" material="src: #silky">
+          <a-animation easing="linear" attribute="rotation" dur="10000" to="0 0 360" repeat="indefinite" ></a-animation>
+        </a-entity>
+
+        <!-- Textured cylinder -->
+        <a-cylinder position="4 3 -5" rotation="0 90 0" radius="2.866" height="3"
+                  theta-length="180" color="222" wireframe="true" scale="0.5 0.5 0.5" open-ended="true" side="double"
+                  sound="src: #b4; on: mouseenter"></a-cylinder>
+                        <a-cylinder position="4 3 -5" rotation="0 90 0" radius="2.866" height="3"
+                  theta-length="180" scale="0.5 0.5 0.5" open-ended="true" side="double"
+                  ></a-cylinder>
+      
+        <!-- Skinny tube -->
+        <a-cylinder position="0 5 -5" rotation="-80 -15 -20" height="5" open-ended="true"
+                  side="double" color="#2a6b53" wireframe="true" sound="src: #b1; on: mouseenter"></a-cylinder>
+                        <a-cylinder position="0 5 -5" rotation="-80 -15 -20" height="5" open-ended="true"
+                  side="double" color="#7BC8A4"></a-cylinder>
+
+        <!-- Skinny tube 2-->
+        <a-cylinder position="20 35 45" scale="9 9 9" rotation="-80 -15 -20" height="5" 
+                  color="#222" wireframe="true" sound="src: #b2; on: mouseenter"></a-cylinder>
+
+        <a-cylinder position="20 35 45" scale="9 9 9" rotation="-80 -15 -20" height="5" 
+                  color="#7BC8A4"></a-cylinder>
+
+        <!-- Flat smooth disc -->
+        <a-cylinder position="4 0 -5" rotation="45 -45 0" radius="2" height="0.5"
+                  segments-radial="64" wireframe="true"  color="#222" wireframe-linewidth="2" metalness=".1" sound="src: #b3; on: mouseenter"></a-cylinder>
+                        <a-cylinder position="4 0 -5" rotation="45 -45 0" radius="2" height="0.5"
+                  segments-radial="64" color="#4CC3D9" metalness=".1"></a-cylinder>
+
+        <!-- Flat smooth disc 2 -->
+        <a-cylinder position="15 4 5" scale="3 3 3" rotation="30 -70 0" radius="2" height="0.5"
+                  segments-radial="64" color="#222" wireframe="true" wireframe-linewidth="2" metalness=".1" sound="src: #b4; on: mouseenter"></a-cylinder>
+        <a-cylinder position="15 4 5" scale="3 3 3" rotation="30 -70 0" radius="2" height="0.5"
+                  segments-radial="64" color="#fff7e2" metalness=".1"></a-cylinder>
+                  
+
+
+        <a-camera>
+          <a-cursor></a-cursor>
+        </a-camera>
+        
+        <a-sky color="#000"></a-sky>
+        <a-light type="ambient"></a-light>
+   
+</a-scene>
+</body>
+</html>
