@@ -1,5 +1,4 @@
 # aframe-soundscape
-WebVR proof of concept using previous living walls project (motion stained glass) superimposed on photosphere.
 A-frame VR environment using primitives to trigger sound on mouse enter. Sounds overlay for the user to orchestrate his own soundscape.
 
 ## Implementation
